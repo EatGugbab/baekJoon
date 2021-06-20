@@ -1,6 +1,6 @@
-# 미해결
 # No. 1260
 # DFS와 BFS
+# https://www.acmicpc.net/problem/1260
 
 # -문제
 # 그래프를 DFS로 탐색한 결과와 BFS로 탐색한 결과를 출력하는 프로그램을 작성하시오.
@@ -24,19 +24,17 @@ data = []
 for _ in range(m):
     data.append(list(map(int, input().split())))
 
-# data[i][j]에서 i를 우선으로 정렬, 후 j를 기준으로 정렬됨
+# 노드가 작은것을 왼쪽에 두고 정렬
+for i in data:
+    if i[0] >= i[1]:
+        k = i[0]
+        i[0] = i[1]
+        i[1] = k
 data.sort()
 
 # 정답 출력을 위해 초기화
 dfsAns = []
 bfsAns = []
-
-def small(a,b):
-    if a <= b :
-        return a, b
-    else:
-        return b, a
-
 
 # 방문했는지 체크
 visitedD = [False] * m
@@ -48,7 +46,8 @@ def dfs(v):
     if v not in dfsAns:
         dfsAns.append(v)
         for i in range(m):
-            a, b = small(data[i][0], data[i][1])
+            a = data[i][0]
+            b = data[i][1]
             if a == v and visitedD[i] == False:
                 visitedD[i] = True
                 dfs(b)
@@ -57,24 +56,28 @@ def dfs(v):
                 dfs(a)
 
 
-dfs(v)
-
 # BFS
-queue = deque()
-queue.append(v)
+def bfs(v):
+    queue = deque()
+    queue.append(v)
 
-while queue:
-    v = queue.popleft()
-    if v not in bfsAns:
-        bfsAns.append(v)
-    for i in range(m):
-        a, b = small(data[i][0], data[i][1])
-        if a == v and visitedB[i] == False:
-            visitedB[i] = True
-            queue.append(b)
-        elif b == v and visitedB[i] == False:
-            visitedB[i] = True
-            queue.append(a)
+    while queue:
+        v = queue.popleft()
+        if v not in bfsAns:
+            bfsAns.append(v)
+        for i in range(m):
+            a = data[i][0]
+            b = data[i][1]
+            if a == v and visitedB[i] == False:
+                visitedB[i] = True
+                queue.append(b)
+            elif b == v and visitedB[i] == False:
+                visitedB[i] = True
+                queue.append(a)
+            
+
+dfs(v)
+bfs(v)
 
 # DFS, BFS 순으로 정답 출력
 for i in dfsAns:
@@ -83,3 +86,13 @@ print()
 
 for i in bfsAns:
     print(i, end=' ')
+
+
+# example input
+#
+# 4 5 1
+# 1 2
+# 1 3
+# 1 4
+# 2 4
+# 3 4
