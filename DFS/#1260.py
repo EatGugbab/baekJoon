@@ -16,6 +16,15 @@
 # 첫째 줄에 DFS를 수행한 결과를, 그 다음 줄에는 BFS를 수행한 결과를 출력한다.
 # V부터 방문된 점을 순서대로 출력하면 된다.
 
+# example input
+#
+# 4 5 1
+# 1 2
+# 1 3
+# 1 4
+# 2 4
+# 3 4
+
 # bfs에서 큐 사용을 위해 deque를 import
 from collections import deque
 
@@ -86,13 +95,3 @@ print()
 
 for i in bfsAns:
     print(i, end=' ')
-
-
-# example input
-#
-# 4 5 1
-# 1 2
-# 1 3
-# 1 4
-# 2 4
-# 3 4
