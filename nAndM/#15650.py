@@ -26,7 +26,7 @@ data = [i for i in range(1, n + 1)]
 
 
 def dfs(d, index):
-    if len(d)<m:
+    if len(d) < m:
         for i in range(index, n):
             nd = d.copy()
             if data[i] not in nd:
@@ -34,6 +34,7 @@ def dfs(d, index):
                 dfs(nd, i)
     elif len(d) == m:
         ans.append(d)
+
 
 ans = []
 d = []
